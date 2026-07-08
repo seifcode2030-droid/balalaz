@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <link rel="stylesheet" href="/style/style.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>علوم - الثالث الثانوي</title>
+</head>
+
+<body>
+
+    <h1>علوم - الثالث الثانوي</h1>
+
+    <div id="videos"></div>
+
+    <script>
+        async function loadVideos() {
+
+            const res = await fetch("/api/videos");
+            const videos = await res.json();
+
+            const container =
+                document.getElementById("videos");
+
+            container.innerHTML = "";
+
+            const scienceVideos = videos.filter(video =>
+                video.className === "thirds" &&
+                video.subject === "science"
+            );
+
+            scienceVideos.forEach(video => {
+
+                container.innerHTML += `
+            <div>
+                <h2>${video.title}</h2>
+
+                <iframe
+  .videoUrl}"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+
+                <hr>
+            </div>
+        `;
+            });
+        }
+
+        loadVideos();
+    </script>
+
+</body>
+
+</html>

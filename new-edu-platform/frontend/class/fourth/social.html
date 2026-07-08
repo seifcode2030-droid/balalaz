@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<link rel="stylesheet" href="/style/style.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دراسات اجتماعية - الرابع الابتدائي</title>
+</head>
+
+<body>
+
+    <h1>دراسات اجتماعية - الرابع الابتدائي</h1>
+
+    <div id="videos"></div>
+
+    <script>
+        async function loadVideos() {
+
+            const res = await fetch("/api/videos");
+            const videos = await res.json();
+
+            const container = document.getElementById("videos");
+
+            container.innerHTML = "";
+
+            const studiesVideos = videos.filter(video =>
+                video.className === "fourth" &&
+                video.subject === "studies"
+            );
+
+            studiesVideos.forEach(video => {
+                container.innerHTML += `
+            <div>
+                <h2>${video.title}</h2>
+
+                <iframe
+  een>
+                </iframe>
+
+                <hr>
+            </div>
+        `;
+            });
+        }
+
+        loadVideos();
+    </script>
+
+</body>
+
+</html>

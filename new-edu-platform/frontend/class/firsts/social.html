@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<link rel="stylesheet" href="/style/style.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دراسات - الأول الثانوي</title>
+</head>
+
+<body>
+
+    <h1>دراسات - الأول الثانوي</h1>
+
+    <div id="videos"></div>
+
+    <script>
+        async function loadVideos() {
+
+            const res = await fetch("/api/videos");
+            const videos = await res.json();
+
+            const container = document.getElementById("videos");
+
+            container.innerHTML = "";
+
+            const socialVideos = videos.filter(video =>
+                video.className === "firsts" &&
+                video.subject === "social"
+            );
+
+            socialVideos.forEach(video => {
+                container.innerHTML += `
+            <div>
+                <h2>${video.title}</h2>
+
+                <iframe
+  "0"
+                    allowfullscreen>
+                </iframe>
+
+                <hr>
+            </div>
+        `;
+            });
+        }
+
+        loadVideos();
+    </script>
+
+</body>
+
+</html>
